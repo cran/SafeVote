@@ -26,10 +26,10 @@ testFraction(
 \item{ainc}{Number of ballots to be added in each step. Must be non-negative.}
 
 \item{arep}{Number of repetitions of the test on each step. Required to be
-non-\code{NULL} if \code{ainc=0} && is.null(trep)`.}
+non-'NULL' if 'ainc=0' && is.null(trep)'.}
 
 \item{trep}{Limit on the total number of simulated elections. Required to be
-non-\code{NULL} if \code{ainc=0 && is.null(arep)}.}
+non-'NULL' if 'ainc=0 && is.null(arep)'.}
 
 \item{rankMethod}{"safeRank" (default), "elected", or "rank".  "rank" is
 a total ranking of the candidates, with ties broken at random.  "elected"
@@ -37,23 +37,21 @@ assigns rank=1 to elected candidates, rank=2 for eliminated candidates.}
 
 \item{countMethod}{countMethod "stv" (default) or "condorcet"}
 
-\item{countArgs}{List of args to be passed to \code{countMethod} (in addition to
-\code{votes})}
+\item{countArgs}{List of args to be passed to 'countMethod' (in addition to
+'votes')}
 
-\item{exptName}{stem-name of experimental units \emph{e.g.} "E".  If \code{NULL}, then
+\item{exptName}{stem-name of experimental units \emph{e.g.} "E".  If 'NULL', then
 a 3-character string of capital letters is chosen at random.}
 
-\item{equiet}{\code{TRUE} to suppress all experimental output}
+\item{equiet}{'TRUE' to suppress all experimental output}
 
-\item{everbose}{\code{TRUE} to produce diagnostic output from the experiment}
+\item{everbose}{'TRUE' to produce diagnostic output from the experiment}
 }
 \value{
-a
-\href{https://cthombor.github.io/SafeVote/reference/new_SafeRankExpt}{SafeRankExpt}
-object of experimental results.
+SafeRankExpt object of experimental results.
 }
 \description{
-Starting from some number (\code{astart}) of randomly-selected ballots, an
+Starting from some number ('astart') of randomly-selected ballots, an
 increasingly-large collection of randomly-selected ballots are counted. The
 ballots are chosen independently without replacement for each experimental
 unit; if you want to count decreasingly-sized portions of a single sample of

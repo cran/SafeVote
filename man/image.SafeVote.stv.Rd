@@ -12,11 +12,11 @@
 \item{xpref, ypref}{candidates shown in a joint distribution plot}
 
 \item{all.pref}{plot the joint distribution of two preferences (if
-\code{all.pref=FALSE}) or the marginal distribution of all preferences (if
-\code{all.pref=TRUE}).}
+'all.pref=FALSE') or the marginal distribution of all preferences (if
+'all.pref=TRUE').}
 
 \item{proportion}{The joint distribution can be shown either as proportions
-(if \code{proportion=TRUE}) or raw vote counts (if \code{proportion=FALSE}).}
+(if 'proportion=TRUE') or raw vote counts (if 'proportion=FALSE').}
 
 \item{...}{args passed to fields::image.plot()}
 }

@@ -25,6 +25,6 @@ The ballots were encoded in David Hill's format, and have been converted to
 the preference-vector format of this package.  The archival file
 A4.HIL at rangevoting.org contains eight blank ballot
 papers (1, 616, 619, 620, 685, 686, 687, 688) which we have retained. This
-set may be counted by \code{stv(a3_hil,nseats=attr(a3_hil,"nseats"))}.
+set may be counted by 'stv(a3_hil,nseats=attr(a3_hil,"nseats"))'.
 }
 \keyword{datasets}

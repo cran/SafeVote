@@ -1,28 +1,28 @@
 #' Count preferential ballots using an STV method
 #'
-#' The `votes` parameter is as described in [condorcet()]
-#' with the following additional semantics.
+#' The 'votes' parameter is as described in [condorcet()] with the following
+#' additional semantics.
 #'
 #' By default the preferences are not allowed to contain duplicates per ballot.
-#' However, if the argument `equal.ranking` is set to `TRUE`, ballots are allowed
+#' However, if the argument 'equal.ranking' is set to 'TRUE', ballots are allowed
 #' to have the same ranking for multiple candidates. The desired format is such
 #' that for each preference $i$ that does not have any duplicate, there must be
 #' exactly $i – 1$ preferences $j$ with $0 < j < i$. For example, valid ordered
-#' preferences are `1; 1; 3; 4; …`, or `1; 2; 3; 3; 3; 6; …`, but NOT `1; 1; 2;
-#' 3; …`, or NOT `1; 2; 3; 3; 3; 5; 6; …`. If the data contain such invalid
+#' preferences are '1; 1; 3; 4; …', or '1; 2; 3; 3; 3; 6; …', but NOT '1; 1; 2;
+#' 3; …', or NOT '1; 2; 3; 3; 3; 5; 6; …'. If the data contain such invalid
 #' votes, they are automatically corrected and a warning is issued by calling
-#' the `correct.ranking` function.
+#' the 'correct.ranking' function.
 #'
-#' If equal ranking is not allowed (`equal.ranking = FALSE`), the argument
-#' `invalid.partial` can be used to make ballots containing duplicates or gaps
-#' partially valid. If it is `TRUE`, a ballot is considered valid up to a
-#' preference that is in normal case not allowed. For example, ballots `1; 2; 3;
-#' 4; 4; 6` or `1; 2; 3; 5; 6; 7` would be both converted into `1; 2; 3; 0; 0;
-#' 0`, because the ballots contain valid ranking only up to the third
+#' If equal ranking is not allowed ('equal.ranking = FALSE'), the argument
+#' 'invalid.partial' can be used to make ballots containing duplicates or gaps
+#' partially valid. If it is 'TRUE', a ballot is considered valid up to a
+#' preference that is in normal case not allowed. For example, ballots '1; 2; 3;
+#' 4; 4; 6' or '1; 2; 3; 5; 6; 7' would be both converted into '1; 2; 3; 0; 0;
+#' 0', because the ballots contain valid ranking only up to the third
 #' preference.
 #' 
 #' By default, ties in the STV algorithm are resolved using the forwards
-#' tie-breaking method, see Newland and Briton (Section 5.2.5). Argument `ties`
+#' tie-breaking method, see Newland and Briton (Section 5.2.5). Argument 'ties'
 #' can be set to ”b” in order to use the backwards tie-breaking method, see
 #' O’Neill (2004). In addition, both methods are complemented by the following
 #' “ordered” method: Prior to the STV election candidates are ordered by the
@@ -31,14 +31,14 @@
 #' random draws. Such complete ordering is used to break any tie that cannot be
 #' resolved by the forwards or backwards method. If there is at least one tie
 #' during the processing, the output contains a row indicating in which count a
-#' tie-break happened (see the `ties` element in the Value section for an
+#' tie-break happened (see the 'ties' element in the Value section for an
 #' explanation of the symbols).
 #' 
 #' The ordered tiebreaking described above can be analysed from outside of the
-#' `stv` function by using the `ordered.tiebreak` function for viewing the
+#' 'stv' function by using the 'ordered.tiebreak' function for viewing the
 #' a-priori ordering (the highest number is the best and lowest is the worst).
 #' Such ranking is produced by comparing candidates along the columns of the
-#' matrix returned by `ordered.preferences`.
+#' matrix returned by 'ordered.preferences'.
 #'
 #' @param votes an array with one column per candidate and one row per ballot,
 #'   as described in [condorcet()]
@@ -46,50 +46,50 @@
 #' @param eps fuzz-factor when comparing fractional votes.  The default of 0.001
 #'   is preserved from the legacy code, injecting substantial validity hazards
 #'   into the codebase.  We have not attempted to mitigate any of these hazards
-#'   in `SafeVote v1.0.0`.  We prefer instead to retain backwards-compatibility
-#'   with the legacy code in `vote_2.3-2` in the knowledge that, even if these
+#'   in 'SafeVote v1.0.0'.  We prefer instead to retain backwards-compatibility
+#'   with the legacy code in 'vote_2.3-2' in the knowledge that, even if these
 #'   hazards were adequately addressed, the resulting code is unlikely to be
 #'   reliable at replicating the results of any other implementation of any of
 #'   the many variants of "STV" counting methods.  Please see the description of
-#'   the `a53_hil` dataset in this package for some preliminary findings on the
+#'   the 'a53_hil' dataset in this package for some preliminary findings on the
 #'   magnitude of the vote-count-variances which may be injected by differing
 #'   implementations of broadly-similar "STV" counting methods.
-#' @param equal.ranking if `TRUE`, equal preferences are allowed.
-#' @param invalid.partial `TRUE` if ballots which do not specify a complete
+#' @param equal.ranking if 'TRUE', equal preferences are allowed.
+#' @param invalid.partial 'TRUE' if ballots which do not specify a complete
 #'   ranking of candidates are informal (aka "invalid") *i.e.* ignored
-#'   (with a warning).  Default is `FALSE`.
+#'   (with a warning).  Default is 'FALSE'.
 #' @param fsep column-separator for output
-#' @param ties vector of tie-breaking methods: `'f'` for forward, `'b'` for
+#' @param ties vector of tie-breaking methods: ''f'' for forward, ''b'' for
 #'   backward
-#' @param quota.hare `TRUE` if Hare quota, `FALSE` if Droop quota (default)
-#' @param constant.quota `TRUE` if quota is held constant.  Over-rides
-#'   `quota.hare`. Default is `FALSE`
-#' @param win.by.elim `TRUE` (default) if the quota is waived when there are no
+#' @param quota.hare 'TRUE' if Hare quota, 'FALSE' if Droop quota (default)
+#' @param constant.quota 'TRUE' if quota is held constant.  Over-rides
+#'   'quota.hare'. Default is 'FALSE'
+#' @param win.by.elim 'TRUE' (default) if the quota is waived when there are no
 #'   more candidates than vacant seats.  Note: there is no lower limit when the
 #'   quota is waived, so a candidate may be elected on zero votes.
 #' @param group.nseats number of seats reserved to members of a group
 #' @param group.members vector of members of the group with reserved seats
-#' @param complete.ranking is `TRUE` by default.  This parameter is retained
+#' @param complete.ranking is 'TRUE' by default.  This parameter is retained
 #'   solely for backwards compatibility with [vote::stv()]. It has no effect on
-#'   elections in which `nseats` is explicitly specified in the call to
+#'   elections in which 'nseats' is explicitly specified in the call to
 #'   [SafeVote::stv()].
-#' @param verbose `TRUE` for diagnostic output
-#' @param seed integer seed for tie-breaking.  Warning: if non-`NULL`, the PRNG
+#' @param verbose 'TRUE' for diagnostic output
+#' @param seed integer seed for tie-breaking.  Warning: if non-'NULL', the PRNG
 #'   for R is reseeded prior to *every* random tie-break among the
 #'   possibly-elected candidates.  We have preserved this functionality in this
 #'   branch to allow regression against the legacy codebase of [vote::stv()]. In
-#'   [SafeVote::stv()] the default value for seed is `NULL` rather than the
+#'   [SafeVote::stv()] the default value for seed is 'NULL' rather than the
 #'   legacy value of 1234, to mitigate the validity hazard of PRNG reseedings
 #'   during a stochastic experiment.
-#' @param quiet `TRUE` to suppress console output
+#' @param quiet 'TRUE' to suppress console output
 #' @param digits number of significant digits in the output table
-#' @param backwards.compatible `TRUE` to regress against vote2_3.2 by
+#' @param backwards.compatible 'TRUE' to regress against vote2_3.2 by
 #'   disabling $margins, $fuzz, $rankingTable, $safeRank
 #' @param safety number of standard deviations on vote-counts, when producing a
 #'   safeRank by clustering near-ties in a complete ranking
 #' @param ... undocumented intent (preserved from legacy code)
 #'
-#' @return object of class `vote.stv`.  Note: the winning margins in this object
+#' @return object of class 'vote.stv'.  Note: the winning margins in this object
 #'   are valid for the elected candidates and their (total) ranking, but must be
 #'   adjusted within tiegroups to be valid for the candidates' (possibly
 #'   partial) safeRank.
@@ -423,7 +423,7 @@ stv <-
       ## the margins of victory, and its vote-totals are at significant variance
       ## to the official vote-totals.
       ##
-      ## Note that the `vmax` terms in each of the three disjunctive clauses of
+      ## Note that the 'vmax' terms in each of the three disjunctive clauses of
       ## the following guard ensure that a non-group candidate must receive at
       ## least one vote (even if it's only a last-preference!) in order to be
       ## elected. This implies that seats may remain unfilled, even if there are
@@ -831,7 +831,7 @@ backwards.tiebreak <- function(prefs, icans, elim = TRUE) {
 #' @param object undocumented, legacy code
 #' @param ... undocumented
 #' @param digits undocumented
-#' @return data.frame summarising `object`, for use by `print` method
+#' @return data.frame summarising 'object', for use by 'print' method
 #' @export
 #'
 summary.SafeVote.stv <- function(object, ..., digits = 3) {
@@ -1059,10 +1059,10 @@ view.SafeVote.stv <- function(object, ...) {
 #' @param x STV results to be visualised
 #' @param xpref,ypref candidates shown in a joint distribution plot
 #' @param all.pref plot the joint distribution of two preferences (if
-#'   `all.pref=FALSE`) or the marginal distribution of all preferences (if
-#'   `all.pref=TRUE`).
+#'   'all.pref=FALSE') or the marginal distribution of all preferences (if
+#'   'all.pref=TRUE').
 #' @param proportion The joint distribution can be shown either as proportions
-#'   (if `proportion=TRUE`) or raw vote counts (if `proportion=FALSE`).
+#'   (if 'proportion=TRUE') or raw vote counts (if 'proportion=FALSE').
 #' @param ... args passed to fields::image.plot()
 #'
 #' @return image object, with side-effect in RStudio Plots pane
@@ -1164,7 +1164,7 @@ image.SafeVote.stv <- function(x,
 
 #' plot() method for the result of an stv() ballot-count
 #'
-#' The `plot` function shows the evolution of the total score for each candidate
+#' The 'plot' function shows the evolution of the total score for each candidate
 #' as well as the quota. 
 #'
 #' @param x stv results

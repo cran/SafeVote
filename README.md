@@ -94,11 +94,11 @@ to reach a Droop quota, so fewer votes are transferred before each seat
 is filled – which will differentially affect the vote-counts of the
 candidates still in play for the remaining seats. Furthermore, the
 [Cambridge method of transferring
-votes](https://www.opavote.com/methods/cambridge-stv-rules) may have
-been employed in the real-world Yale Senate election. Under these rules,
-the initial numbering of the ballots determines the ballot papers which
-are consulted when a candidate’s surplus votes are transfered. As noted
-in the tests of [STV v1.0.2](https://cran.r-project.org/package=STV), if
+votes](https://opavote.com/methods/cambridge-stv-rules) may have been
+employed in the real-world Yale Senate election. Under these rules, the
+initial numbering of the ballots determines the ballot papers which are
+consulted when a candidate’s surplus votes are transfered. As noted in
+the tests of [STV v1.0.2](https://cran.r-project.org/package=STV), if
 ballots are selected for a vote-transfer process by a pseudorandom
 number generator, the seeding of this generator affects the outcome of
 the election. The per-candidate boxplots in the last decile of
@@ -224,7 +224,7 @@ much more appropriate for use by the NZ Greens than any ranking that is
 derived from a Condorcet scoring process. Indeed, the NZ Greens are
 currently using a modification of Meek’s STV algorithm, enshrined in
 [Schedule 1A of Local Electoral Regulations
-2001](https://www.legislation.govt.nz/regulation/public/2001/0145/latest/DLM57125.html),
+2001](https://legislation.govt.nz/regulation/public/2001/0145/latest/DLM57125.html),
 to form its party list. Under its current rules, the NZ Greens rely on a
 delegated assembly to form an initial list. In a possible future in
 which the NZ Greens have dozens of elected MPs, the size of this

@@ -9,9 +9,9 @@ correct.ranking(votes, partial = FALSE, quiet = FALSE)
 \arguments{
 \item{votes}{original contents of ballot box}
 
-\item{partial}{if \code{FALSE} (default), each ballot is interpreted, if possible,
+\item{partial}{if 'FALSE' (default), each ballot is interpreted, if possible,
 as a complete (but not necessarily total) ranking of the candidates.  If
-\code{TRUE}, a ballot will contain a \code{0} on unranked candidates.}
+'TRUE', a ballot will contain a '0' on unranked candidates.}
 
 \item{quiet}{suppress diagnostics}
 }
@@ -19,10 +19,11 @@ as a complete (but not necessarily total) ranking of the candidates.  If
 corrected ballots
 }
 \description{
-The \code{correct.ranking} function returns a modified set of ballots.  Its
-argument \code{partial} determines if ballots are partially set to \code{0} (\code{TRUE}),
-or if it is a complete re-ranking, as allowed when \code{equal.ranking = TRUE}. It
-can be used by calling it explicitly. It is called by \code{stv} if \code{equal.ranking = TRUE} or \code{invalid.partial = TRUE}. It is also called from within the
-\code{condorcet} function with the default value (\code{FALSE}) for \code{partial}, i.e.
-interpreting any \code{0} as a last= preference.
+The 'correct.ranking' function returns a modified set of ballots.  Its
+argument 'partial' determines if ballots are partially set to '0' ('TRUE'),
+or if it is a complete re-ranking, as allowed when 'equal.ranking = TRUE'. It
+can be used by calling it explicitly. It is called by 'stv' if 'equal.ranking
+= TRUE' or 'invalid.partial = TRUE'. It is also called from within the
+'condorcet' function with the default value ('FALSE') for 'partial', i.e.
+interpreting any '0' as a last= preference.
 }

@@ -1,32 +1,30 @@
 #' Assess the safety of a preliminary result for an election
 #'
 #' Ballots are deleted at random from the ballot-box, with election results
-#' computed once per `dinc` ballot-deletions.  The experiment terminates after a
+#' computed once per 'dinc' ballot-deletions.  The experiment terminates after a
 #' specified number of ballots have been deleted, or a specified number of
 #' ballot-counts have occurred.  Note: these ballot-counts are correlated.  Use
-#' [testFraction()](https://cthombor.github.io/SafeVote/reference/testFraction)
-#' to experiment with independently-drawn samples from the ballot-box.
+#' [testFraction()] to experiment with independently-drawn samples from the
+#' ballot-box.
 #'
 #' @param votes A set of ballots, as in 
 #'   [vote_2.3.2](https://CRAN.R-project.org/package=vote)
 #' @param countMethod "stv" (default) or "condorcet"
-#' @param countArgs List of args to be passed to `countMethod` (in addition to
-#'   `votes`)
+#' @param countArgs List of args to be passed to 'countMethod' (in addition to
+#'   'votes')
 #' @param rankMethod "safeRank" (default), "elected", or "rank".  "rank" is
 #'   a total ranking of the candidates, with ties broken at random.  "elected"
 #'   assigns rank=1 to elected candidates, rank=2 for eliminated candidates.
 #' @param dstart Number of ballots in the first ballot-count (selected at random
-#'   from `votes`, without replacement)
+#'   from 'votes', without replacement)
 #' @param dinc Number of ballots to be deleted in subsequent steps
-#' @param dlimit Maximum number of ballots to delete (in addition to `dstart`)
-#' @param drep Maximum number of elections (required if `dinc=0`)
-#' @param exptName stem-name of experimental units *e.g.* "E".  If `NULL`, then
+#' @param dlimit Maximum number of ballots to delete (in addition to 'dstart')
+#' @param drep Maximum number of elections (required if 'dinc=0')
+#' @param exptName stem-name of experimental units *e.g.* "E".  If 'NULL', then
 #'   a 3-character string of capital letters is chosen at random.
 #' @param equiet TRUE to suppress all experimental output
 #' @param everbose TRUE to produce diagnostic output from the experiment
-#' @return
-#'   [SafeRankExpt](https://cthombor.github.io/SafeVote/reference/new_SafeRankExpt)
-#'   object, describing this experiment and its results
+#' @return 'SafeRankExpt' object, describing this experiment and its results
 #' @export
 #' @import data.table
 #' @examples
@@ -141,7 +139,7 @@ testDeletions <- function(votes,
                            nBallots = nb),
                       append(crRanks,
                              crMargins))
-  result <- rbind.SafeRankExpt(result, newResult)
+  result <- rbind_SafeRankExpt(result, newResult)
   
   if (!equiet) {
     cat(paste0("Number of ballots counted by ", countMethod, ": ", nb))
@@ -175,7 +173,7 @@ testDeletions <- function(votes,
                              nBallots = nb),
                         append(crRanks,
                                crMargins))
-    result <- rbind.SafeRankExpt(result, newResult)
+    result <- rbind_SafeRankExpt(result, newResult)
     stopifnot(is.SafeRankExpt(result))
   }
   
@@ -194,11 +192,11 @@ testDeletions <- function(votes,
 
 #' Test the sensitivity of a result to tactical voting.
 #'
-#' Ballots are added until a specified number of simulated elections (`arep`)
-#' have been held.   If a `favoured` candidate is specified, then the ballot-box
+#' Ballots are added until a specified number of simulated elections ('arep')
+#' have been held.   If a 'favoured' candidate is specified, then the ballot-box
 #' is stuffed with ballots awarding first-preference to this candidate.
-#' Alternatively, a `tacticalBallot` may be specified.  If both `favoured` and
-#' `tacticalBallot` are `NULL`, then a random candidate is selected as the
+#' Alternatively, a 'tacticalBallot' may be specified.  If both 'favoured' and
+#' 'tacticalBallot' are 'NULL', then a random candidate is selected as the
 #' favoured one.
 #'
 #' @param votes A set of ballots, as in
@@ -209,20 +207,20 @@ testDeletions <- function(votes,
 #' @param rankMethod "safeRank" (default), "elected", or "rank".  "rank" is
 #'   a total ranking of the candidates, with ties broken at random.  "elected"
 #'   assigns rank=1 to elected candidates, rank=2 for eliminated candidates.
-#' @param favoured Name of the candidate being "plumped".  If `NULL`, a random
+#' @param favoured Name of the candidate being "plumped".  If 'NULL', a random
 #'   candidate is selected from among the candidates not initially top-ranked.
 #'   All other candidates are fully-ranked at random, with an identical ballot
-#'   paper being stuffed multiple times.  An integer value for `favoured` is
+#'   paper being stuffed multiple times.  An integer value for 'favoured' is
 #'   interpreted as an index into the candidate names.
-#' @param tacticalBallot A ballot paper i.e. a vector of length `ncol(ballots)`.
-#'   If this argument is non-`NULL`, it takes precedence over `favoured` when the
+#' @param tacticalBallot A ballot paper i.e. a vector of length 'ncol(ballots)'.
+#'   If this argument is non-'NULL', it takes precedence over 'favoured' when the
 #'   ballot box is being stuffed.
 #' @param ainc Number of ballots to be added in each step
 #' @param arep Maximum number of ballot-stuffed elections to run
-#' @param exptName stem-name of experimental units *e.g.* "E".  If `NULL`, then
+#' @param exptName stem-name of experimental units *e.g.* "E".  If 'NULL', then
 #'   a 3-character string of capital letters is chosen at random.
-#' @param equiet `TRUE` to suppress all experimental output
-#' @param everbose `TRUE` to produce diagnostic output from the experiment
+#' @param equiet 'TRUE' to suppress all experimental output
+#' @param everbose 'TRUE' to produce diagnostic output from the experiment
 #' @return A matrix of experimental results, of dimension \eqn{n} by \eqn{2m+1},
 #'   where \eqn{n} is the number of elections and \eqn{m} is the number of
 #'   candidates.  The first column is named "nBallots".  Other columns indicate
@@ -324,7 +322,7 @@ testAdditions <- function(votes,
                            nBallots = nrow(votes)),
                       append(crRanks,
                              crMargins))
-  result <- rbind.SafeRankExpt(result, newResult)
+  result <- rbind_SafeRankExpt(result, newResult)
   nseats <- cr$nseats
   attr(result, "nseats") <- nseats
 
@@ -374,7 +372,7 @@ testAdditions <- function(votes,
                              nBallots = nrow(svotes)),
                         append(crRanks,
                                crMargins))
-    result <- rbind.SafeRankExpt(result, newResult)
+    result <- rbind_SafeRankExpt(result, newResult)
     
   }
   
@@ -388,7 +386,7 @@ testAdditions <- function(votes,
 
 #' Bootstrapping experiment, with fractional counts of a ballot box.
 #'
-#' Starting from some number (`astart`) of randomly-selected ballots, an
+#' Starting from some number ('astart') of randomly-selected ballots, an
 #' increasingly-large collection of randomly-selected ballots are counted. The
 #' ballots are chosen independently without replacement for each experimental
 #' unit; if you want to count decreasingly-sized portions of a single sample of
@@ -396,24 +394,22 @@ testAdditions <- function(votes,
 #'
 #' @param votes A numeric matrix: one row per ballot, one column per candidate
 #' @param countMethod countMethod "stv" (default) or "condorcet"
-#' @param countArgs List of args to be passed to `countMethod` (in addition to
-#'   `votes`)
+#' @param countArgs List of args to be passed to 'countMethod' (in addition to
+#'   'votes')
 #' @param rankMethod "safeRank" (default), "elected", or "rank".  "rank" is
 #'   a total ranking of the candidates, with ties broken at random.  "elected"
 #'   assigns rank=1 to elected candidates, rank=2 for eliminated candidates.
 #' @param astart Starting number of ballots (min 2)
 #' @param ainc Number of ballots to be added in each step. Must be non-negative.
 #' @param arep Number of repetitions of the test on each step. Required to be
-#'   non-`NULL` if `ainc=0` && is.null(trep)`.
+#'   non-'NULL' if 'ainc=0' && is.null(trep)'.
 #' @param trep Limit on the total number of simulated elections. Required to be
-#'   non-`NULL` if `ainc=0 && is.null(arep)`.
-#' @param exptName stem-name of experimental units *e.g.* "E".  If `NULL`, then
+#'   non-'NULL' if 'ainc=0 && is.null(arep)'.
+#' @param exptName stem-name of experimental units *e.g.* "E".  If 'NULL', then
 #'   a 3-character string of capital letters is chosen at random.
-#' @param equiet `TRUE` to suppress all experimental output
-#' @param everbose `TRUE` to produce diagnostic output from the experiment
-#' @return a
-#'   [SafeRankExpt](https://cthombor.github.io/SafeVote/reference/new_SafeRankExpt)
-#'   object of experimental results.
+#' @param equiet 'TRUE' to suppress all experimental output
+#' @param everbose 'TRUE' to produce diagnostic output from the experiment
+#' @return SafeRankExpt object of experimental results.
 #' @export
 #' @examples
 #' data(food_election)
@@ -475,11 +471,11 @@ testFraction <- function(votes = NULL,
     nsteps <- 1
   }
   
-  ## `nb` is a vector of distinct `nBallot` values for our experiment
+  ## 'nb' is a vector of distinct 'nBallot' values for our experiment
   nb <- astart + ainc * (0:nsteps)
   stopifnot(length(nb) > 0 && !any(nb > nv) && !any(nb < 2))
   
-  ## `nbb` is a vector of all `nBallot` values for our experiment
+  ## 'nbb' is a vector of all 'nBallot' values for our experiment
   nbb <- numeric(trep) ## preallocate, to avoid memory-thrashing
   i <- 0
   for (j in 1:(arep + 1)) {
@@ -553,7 +549,7 @@ testFraction <- function(votes = NULL,
                              nBallots = nb),
                         append(crRanks,
                                crMargins))
-    result <- rbind.SafeRankExpt(result, newResult)
+    result <- rbind_SafeRankExpt(result, newResult)
   }
   
   if (!equiet) {
@@ -746,7 +742,7 @@ is.SafeRankExpt <- function(x) {
 #'
 #' @return SafeRankExpt object with an additional row
 #' 
-rbind.SafeRankExpt <- function(object, row) {
+rbind_SafeRankExpt <- function(object, row) {
   stopifnot(is.SafeRankExpt(object))
   ##TODO: optimise, if level 2 of the R Inferno is ever painfully hot
   result <- dplyr::bind_rows(object, row)
@@ -846,30 +842,30 @@ print.summary.SafeRankExpt <- function(x, ...) {
 #' \eqn{e^{-cx/\sqrt{n}}}, where \eqn{x} is the adjusted margin (i.e. the number
 #' of votes by which this candidate is ahead of the next-weaker candidate,
 #' adjusted for the number of ballots \eqn{n} and the number of seats \eqn{s}),
-#' and \eqn{c>0} is the margin-scaling parameter `cMargin`.
+#' and \eqn{c>0} is the margin-scaling parameter 'cMargin'.
 #'
-#' The default value of `cMargin=1.0` draws visual attention to candidates with
+#' The default value of 'cMargin=1.0' draws visual attention to candidates with
 #' a very small winning margin, as their adjusted rank is very near to
 #' \eqn{r+1}.  Candidates with anything more than a small winning margin have
 #' only a small rank adjustment, due to the exponential scaling.
 #' 
-#' A scaling linear in \eqn{s/n} is applied to margins when `anBallots>0`.  Such
+#' A scaling linear in \eqn{s/n} is applied to margins when 'anBallots>0'.  Such
 #' a linear scaling may be a helpful way to visualise the winning margins in STV
 #' elections because the margin of victory for an elected candidate is typically
 #' not much larger than the quota of \eqn{n/(s+1)} (Droop) or \eqn{n/s} (Hare).
 #' The linear scaling factor is \eqn{as/n}, where \eqn{a} is the value of
-#' `anBallots`, \eqn{s} is the number of seats, and \eqn{n} is the number of
+#' 'anBallots', \eqn{s} is the number of seats, and \eqn{n} is the number of
 #' ballots. For plotting on the (inverted) adjusted rank scale, the
 #' linearly-scaled margin is added to the candidate's rank.  Note that the
 #' linearly-scaled margins are zero when \eqn{a=0}, and thus have no effect on
-#' the adjusted rank.  You might want to increase the value of `anBallots`,
+#' the adjusted rank.  You might want to increase the value of 'anBallots',
 #' starting from 1.0, until the winning candidate's adjusted rank is 1.0 when
 #' all ballots are counted, then confirm that the adjusted ranks of other
 #' candidates are still congruent with their ranking (i.e. that the
 #' rank-adjustment is less than 1 in all cases except perhaps on an initial
 #' transient with small numbers of ballots).
 #' 
-#' When both `anBallots` and `cMargins` are non-zero, the ranks are adjusted
+#' When both 'anBallots' and 'cMargins' are non-zero, the ranks are adjusted
 #' with both exponentially-scaled margins and linearly-scaled margins. The
 #' resulting plot would be difficult to interpret in a valid way.
 #' 
@@ -967,7 +963,7 @@ plot.SafeRankExpt <- function(x,
   ## \eqn{s <- \exp(-cm / \sqrt{n}}
   ##
   ## Note that a small winning margin adds almost a full point of rank when
-  ## `cMargin>0`, and any margin is a full point of rank when `cMargin==0`.
+  ## 'cMargin>0', and any margin is a full point of rank when 'cMargin==0'.
   scores <- as.data.table(x)
   scores[, (snames) := exp(-cMargin * .SD / sqrt(scores$nBallots)),
          .SDcols = mnames]

@@ -7,36 +7,36 @@
 #' who loses against all other candidates. Neither Condorcet winner nor loser
 #' might exist.
 #'
-#' If the runoff argument is set to `TRUE` and no Condorcet winner exists,
+#' If the runoff argument is set to 'TRUE' and no Condorcet winner exists,
 #' two or more candidates with the most pairwise wins are selected and
 #' the method is applied to such subset. If more than two candidates are in
 #' such run-off, the selection is performed repeatedly, until either a winner
 #' is selected or no more selection is possible.
 #' 
 #' The input data votes is structured the same way as for the [stv] method: 
-#' Row `i` contains the preferences of voter `i` numbered 
-#' `1; 2; : : : ; r; 0; 0; 0; 0`, in some order, while equal preferences
+#' Row 'i' contains the preferences of voter 'i' numbered 
+#' '1; 2; : : : ; r; 0; 0; 0; 0', in some order, while equal preferences
 #' are allowed. The columns correspond to the candidates. The [dimnames] of
 #' the columns are the names of the candidates; if these are not supplied
-#' then the candidates are lettered `A, B, C, ...`. If the dataset 
+#' then the candidates are lettered 'A, B, C, ...'. If the dataset 
 #' contains missing values ([NA]), they are replaced by zeros.
 #' 
 #' If a ballot has equally-ranked candidates, its rankings are tested for
 #' validity: for each preference \eqn{i} which does not have any duplicate,
 #' there are exactly \eqn{i - 1} preferences \eqn{j} with \eqn{0 < j < i}. If
-#' any ballot `x` fails this validity test, it is automatically corrected (aka
-#' "converted") into a valid ballot using `x <- rank(x, ties.method = "min")`,
+#' any ballot 'x' fails this validity test, it is automatically corrected (aka
+#' "converted") into a valid ballot using 'x <- rank(x, ties.method = "min")',
 #' and a warning is issued.
 #'
 #' This method also computes a Borda ranking of all candidates, using
-#' tournament-style scoring.  This ranking is "fuzzed" into a `safeRank`, with
-#' approximately 1 s.d. of fuzz when `safety=1.0` and voter preferences are
-#' i.u.d.  A warning is thrown if a `safeRank` violates the (extended) Condorcet
+#' tournament-style scoring.  This ranking is "fuzzed" into a 'safeRank', with
+#' approximately 1 s.d. of fuzz when 'safety=1.0' and voter preferences are
+#' i.u.d.  A warning is thrown if a 'safeRank' violates the (extended) Condorcet
 #' principle: that Candidate \eqn{i} is more highly ranked than Candidate
 #' \eqn{j} only if a majority of voters agree with this.
 #' 
 #' @param votes A [matrix] or [data.frame] containing the votes. Rows correspond
-#'   to the votes, columns correspond to the candidates. If `votes` is a
+#'   to the votes, columns correspond to the candidates. If 'votes' is a
 #'   character string, it is interpreted as a file name from which the votes are
 #'   to be read. See
 #'   [below](https://cthombor.github.io/SafeVote/reference/condorcet#details).
@@ -45,15 +45,15 @@
 #'   [below](https://cthombor.github.io/SafeVote/reference/condorcet#details).
 #' @param nseats the number of seats to be filled in this election
 #' @param safety Parameter for a clustering heuristic on a total ranking of
-#' the candidates.  Conjecture: the default of `1.0` ensures a separation
-#' of one s.d. between clusters, when `votes` are i.u.d. permutations on the
+#' the candidates.  Conjecture: the default of '1.0' ensures a separation
+#' of one s.d. between clusters, when 'votes' are i.u.d. permutations on the
 #' candidates.
-#' @param fsep If `votes` is a file name, this argument gives the column
+#' @param fsep If 'votes' is a file name, this argument gives the column
 #' separator in the file.
 #' @param quiet If [TRUE] no output is printed.
 #' @param ... Undocumented intent (preserved from legacy code)
 #'
-#' @return Object of class `SafeVote.condorcet`
+#' @return Object of class 'SafeVote.condorcet'
 #' @export
 #'
 #' @examples {
@@ -347,7 +347,7 @@ summary.SafeVote.condorcet <- function(object, ...) {
 #' @param x object of type summary.SafeVote.condorcet
 #' @param ... parameters passed to generic [print]
 #'
-#' @return textual description of `x`
+#' @return textual description of 'x'
 #' @export
 print.summary.SafeVote.condorcet <- function(x, ...) {
   cat("\nResults of Condorcet voting")
@@ -398,14 +398,14 @@ view.SafeVote.condorcet <- function(object, ...) {
 }
 
 #' The image function visualizes the joint distribution of two preferences
-#' (if `all.pref=FALSE`) given `xpref` and `ypref`, as well as the marginal
-#' distribution of all preferences (if `all.pref=TRUE`). The joint distribution
-#' can be shown as proportions (if `proportion=TRUE`) or raw vote counts
-#' (if `proportion=FALSE`).
+#' (if 'all.pref=FALSE') given 'xpref' and 'ypref', as well as the marginal
+#' distribution of all preferences (if 'all.pref=TRUE'). The joint distribution
+#' can be shown as proportions (if 'proportion=TRUE') or raw vote counts
+#' (if 'proportion=FALSE').
 #' 
 #' @param x object of type SafeVote.condorcet
-#' @param ... See arguments for [image.SafeVote.stv], especially `xpref`,
-#'   `ypref`, `all.pref` and `proportion`.
+#' @param ... See arguments for [image.SafeVote.stv], especially 'xpref',
+#'   'ypref', 'all.pref' and 'proportion'.
 #' @return image object, with side-effect in RStudio Plots pane
 #' @export
 image.SafeVote.condorcet <- function(x, ...) {

@@ -24,23 +24,23 @@ testDeletions(
 
 \item{countMethod}{"stv" (default) or "condorcet"}
 
-\item{countArgs}{List of args to be passed to \code{countMethod} (in addition to
-\code{votes})}
+\item{countArgs}{List of args to be passed to 'countMethod' (in addition to
+'votes')}
 
 \item{dstart}{Number of ballots in the first ballot-count (selected at random
-from \code{votes}, without replacement)}
+from 'votes', without replacement)}
 
 \item{dinc}{Number of ballots to be deleted in subsequent steps}
 
-\item{dlimit}{Maximum number of ballots to delete (in addition to \code{dstart})}
+\item{dlimit}{Maximum number of ballots to delete (in addition to 'dstart')}
 
-\item{drep}{Maximum number of elections (required if \code{dinc=0})}
+\item{drep}{Maximum number of elections (required if 'dinc=0')}
 
 \item{rankMethod}{"safeRank" (default), "elected", or "rank".  "rank" is
 a total ranking of the candidates, with ties broken at random.  "elected"
 assigns rank=1 to elected candidates, rank=2 for eliminated candidates.}
 
-\item{exptName}{stem-name of experimental units \emph{e.g.} "E".  If \code{NULL}, then
+\item{exptName}{stem-name of experimental units \emph{e.g.} "E".  If 'NULL', then
 a 3-character string of capital letters is chosen at random.}
 
 \item{equiet}{TRUE to suppress all experimental output}
@@ -48,16 +48,15 @@ a 3-character string of capital letters is chosen at random.}
 \item{everbose}{TRUE to produce diagnostic output from the experiment}
 }
 \value{
-\href{https://cthombor.github.io/SafeVote/reference/new_SafeRankExpt}{SafeRankExpt}
-object, describing this experiment and its results
+'SafeRankExpt' object, describing this experiment and its results
 }
 \description{
 Ballots are deleted at random from the ballot-box, with election results
-computed once per \code{dinc} ballot-deletions.  The experiment terminates after a
+computed once per 'dinc' ballot-deletions.  The experiment terminates after a
 specified number of ballots have been deleted, or a specified number of
 ballot-counts have occurred.  Note: these ballot-counts are correlated.  Use
-\href{https://cthombor.github.io/SafeVote/reference/testFraction}{testFraction()}
-to experiment with independently-drawn samples from the ballot-box.
+\code{\link[=testFraction]{testFraction()}} to experiment with independently-drawn samples from the
+ballot-box.
 }
 \examples{
 data(food_election)

@@ -36,28 +36,28 @@ as described in \code{\link[=condorcet]{condorcet()}}}
 \item{eps}{fuzz-factor when comparing fractional votes.  The default of 0.001
 is preserved from the legacy code, injecting substantial validity hazards
 into the codebase.  We have not attempted to mitigate any of these hazards
-in \verb{SafeVote v1.0.0}.  We prefer instead to retain backwards-compatibility
-with the legacy code in \code{vote_2.3-2} in the knowledge that, even if these
+in 'SafeVote v1.0.0'.  We prefer instead to retain backwards-compatibility
+with the legacy code in 'vote_2.3-2' in the knowledge that, even if these
 hazards were adequately addressed, the resulting code is unlikely to be
 reliable at replicating the results of any other implementation of any of
 the many variants of "STV" counting methods.  Please see the description of
-the \code{a53_hil} dataset in this package for some preliminary findings on the
+the 'a53_hil' dataset in this package for some preliminary findings on the
 magnitude of the vote-count-variances which may be injected by differing
 implementations of broadly-similar "STV" counting methods.}
 
-\item{equal.ranking}{if \code{TRUE}, equal preferences are allowed.}
+\item{equal.ranking}{if 'TRUE', equal preferences are allowed.}
 
 \item{fsep}{column-separator for output}
 
-\item{ties}{vector of tie-breaking methods: \code{'f'} for forward, \code{'b'} for
+\item{ties}{vector of tie-breaking methods: ''f'' for forward, ''b'' for
 backward}
 
-\item{quota.hare}{\code{TRUE} if Hare quota, \code{FALSE} if Droop quota (default)}
+\item{quota.hare}{'TRUE' if Hare quota, 'FALSE' if Droop quota (default)}
 
-\item{constant.quota}{\code{TRUE} if quota is held constant.  Over-rides
-\code{quota.hare}. Default is \code{FALSE}}
+\item{constant.quota}{'TRUE' if quota is held constant.  Over-rides
+'quota.hare'. Default is 'FALSE'}
 
-\item{win.by.elim}{\code{TRUE} (default) if the quota is waived when there are no
+\item{win.by.elim}{'TRUE' (default) if the quota is waived when there are no
 more candidates than vacant seats.  Note: there is no lower limit when the
 quota is waived, so a candidate may be elected on zero votes.}
 
@@ -65,30 +65,30 @@ quota is waived, so a candidate may be elected on zero votes.}
 
 \item{group.members}{vector of members of the group with reserved seats}
 
-\item{complete.ranking}{is \code{TRUE} by default.  This parameter is retained
+\item{complete.ranking}{is 'TRUE' by default.  This parameter is retained
 solely for backwards compatibility with \code{\link[vote:stv]{vote::stv()}}. It has no effect on
-elections in which \code{nseats} is explicitly specified in the call to
+elections in which 'nseats' is explicitly specified in the call to
 \code{\link[=stv]{stv()}}.}
 
-\item{invalid.partial}{\code{TRUE} if ballots which do not specify a complete
+\item{invalid.partial}{'TRUE' if ballots which do not specify a complete
 ranking of candidates are informal (aka "invalid") \emph{i.e.} ignored
-(with a warning).  Default is \code{FALSE}.}
+(with a warning).  Default is 'FALSE'.}
 
-\item{verbose}{\code{TRUE} for diagnostic output}
+\item{verbose}{'TRUE' for diagnostic output}
 
-\item{seed}{integer seed for tie-breaking.  Warning: if non-\code{NULL}, the PRNG
+\item{seed}{integer seed for tie-breaking.  Warning: if non-'NULL', the PRNG
 for R is reseeded prior to \emph{every} random tie-break among the
 possibly-elected candidates.  We have preserved this functionality in this
 branch to allow regression against the legacy codebase of \code{\link[vote:stv]{vote::stv()}}. In
-\code{\link[=stv]{stv()}} the default value for seed is \code{NULL} rather than the
+\code{\link[=stv]{stv()}} the default value for seed is 'NULL' rather than the
 legacy value of 1234, to mitigate the validity hazard of PRNG reseedings
 during a stochastic experiment.}
 
-\item{quiet}{\code{TRUE} to suppress console output}
+\item{quiet}{'TRUE' to suppress console output}
 
 \item{digits}{number of significant digits in the output table}
 
-\item{backwards.compatible}{\code{TRUE} to regress against vote2_3.2 by
+\item{backwards.compatible}{'TRUE' to regress against vote2_3.2 by
 disabling $margins, $fuzz, $rankingTable, $safeRank}
 
 \item{safety}{number of standard deviations on vote-counts, when producing a
@@ -97,33 +97,36 @@ safeRank by clustering near-ties in a complete ranking}
 \item{...}{undocumented intent (preserved from legacy code)}
 }
 \value{
-object of class \code{vote.stv}.  Note: the winning margins in this object
+object of class 'vote.stv'.  Note: the winning margins in this object
 are valid for the elected candidates and their (total) ranking, but must be
 adjusted within tiegroups to be valid for the candidates' (possibly
 partial) safeRank.
 }
 \description{
-The \code{votes} parameter is as described in \code{\link[=condorcet]{condorcet()}}
-with the following additional semantics.
+The 'votes' parameter is as described in \code{\link[=condorcet]{condorcet()}} with the following
+additional semantics.
 }
 \details{
 By default the preferences are not allowed to contain duplicates per ballot.
-However, if the argument \code{equal.ranking} is set to \code{TRUE}, ballots are allowed
+However, if the argument 'equal.ranking' is set to 'TRUE', ballots are allowed
 to have the same ranking for multiple candidates. The desired format is such
 that for each preference $i$ that does not have any duplicate, there must be
 exactly $i – 1$ preferences $j$ with $0 < j < i$. For example, valid ordered
-preferences are \verb{1; 1; 3; 4; …}, or \verb{1; 2; 3; 3; 3; 6; …}, but NOT \verb{1; 1; 2; 3; …}, or NOT \verb{1; 2; 3; 3; 3; 5; 6; …}. If the data contain such invalid
+preferences are '1; 1; 3; 4; …', or '1; 2; 3; 3; 3; 6; …', but NOT '1; 1; 2;
+3; …', or NOT '1; 2; 3; 3; 3; 5; 6; …'. If the data contain such invalid
 votes, they are automatically corrected and a warning is issued by calling
-the \code{correct.ranking} function.
+the 'correct.ranking' function.
 
-If equal ranking is not allowed (\code{equal.ranking = FALSE}), the argument
-\code{invalid.partial} can be used to make ballots containing duplicates or gaps
-partially valid. If it is \code{TRUE}, a ballot is considered valid up to a
-preference that is in normal case not allowed. For example, ballots \verb{1; 2; 3; 4; 4; 6} or \verb{1; 2; 3; 5; 6; 7} would be both converted into \verb{1; 2; 3; 0; 0; 0}, because the ballots contain valid ranking only up to the third
+If equal ranking is not allowed ('equal.ranking = FALSE'), the argument
+'invalid.partial' can be used to make ballots containing duplicates or gaps
+partially valid. If it is 'TRUE', a ballot is considered valid up to a
+preference that is in normal case not allowed. For example, ballots '1; 2; 3;
+4; 4; 6' or '1; 2; 3; 5; 6; 7' would be both converted into '1; 2; 3; 0; 0;
+0', because the ballots contain valid ranking only up to the third
 preference.
 
 By default, ties in the STV algorithm are resolved using the forwards
-tie-breaking method, see Newland and Briton (Section 5.2.5). Argument \code{ties}
+tie-breaking method, see Newland and Briton (Section 5.2.5). Argument 'ties'
 can be set to ”b” in order to use the backwards tie-breaking method, see
 O’Neill (2004). In addition, both methods are complemented by the following
 “ordered” method: Prior to the STV election candidates are ordered by the
@@ -132,14 +135,14 @@ of second preferences, then third and so on. Remaining ties are broken by
 random draws. Such complete ordering is used to break any tie that cannot be
 resolved by the forwards or backwards method. If there is at least one tie
 during the processing, the output contains a row indicating in which count a
-tie-break happened (see the \code{ties} element in the Value section for an
+tie-break happened (see the 'ties' element in the Value section for an
 explanation of the symbols).
 
 The ordered tiebreaking described above can be analysed from outside of the
-\code{stv} function by using the \code{ordered.tiebreak} function for viewing the
+'stv' function by using the 'ordered.tiebreak' function for viewing the
 a-priori ordering (the highest number is the best and lowest is the worst).
 Such ranking is produced by comparing candidates along the columns of the
-matrix returned by \code{ordered.preferences}.
+matrix returned by 'ordered.preferences'.
 }
 \examples{
 data(food_election)

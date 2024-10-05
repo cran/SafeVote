@@ -118,7 +118,7 @@
 #' @description This data follows the structure of a 2016 Yale
 #'   Faculty Senate election, with candidate names anonymised and permuted.
 #'   Imported to SafeVote from [STV v1.0.2](https://github.com/jayemerson/STV),
-#'   after applying the `STV::cleanBallots` method to remove the ten empty
+#'   after applying the 'STV::cleanBallots' method to remove the ten empty
 #'   rows.
 #'   
 #' @format A data frame with 479 observations and 44 candidates. 
@@ -158,7 +158,7 @@
 #'   the preference-vector format of this package.  The archival file
 #'   A4.HIL at rangevoting.org contains eight blank ballot
 #'   papers (1, 616, 619, 620, 685, 686, 687, 688) which we have retained. This
-#'   set may be counted by `stv(a3_hil,nseats=attr(a3_hil,"nseats"))`.
+#'   set may be counted by 'stv(a3_hil,nseats=attr(a3_hil,"nseats"))'.
 #'   
 #' @format A data frame with attribute "nseats" = 7, consisting of 989
 #'   observations and 15 candidates.
@@ -207,20 +207,20 @@
 #'   embedded colon which isn't handled by the usual DOI-to-URL conversions.
 #'   
 #'   As noted in this table, it is a very close race between candidates D, F,
-#'   and B in the final rounds of a Meek count of `a53_hil`.  
+#'   and B in the final rounds of a Meek count of 'a53_hil'.  
 #'   
 #'   Tideman's implementation of Meek's method excludes B (on 59.02 votes), then
 #'   elects D in the final round (on 88.33 votes) with a margin of 0.95 votes
 #'   ahead of F (on 87.38 votes).  
 #'   
-#'   In v1.0, `stv(a53.hil,quota.hare=TRUE)` excludes F (on 56.418 votes), then
+#'   In v1.0, 'stv(a53.hil,quota.hare=TRUE)' excludes F (on 56.418 votes), then
 #'   elects D in the final round (on 79.705 votes) with a winning margin of
 #'   0.747 votes ahead of B (on 78.958 votes). The result of the election is the
 #'   same but the vote counts and winning margins differ significantly; so we
-#'   conclude that `stv(quota.hare=TRUE)` in SafeVote v1.0 is *not* a reliable
+#'   conclude that 'stv(quota.hare=TRUE)' in SafeVote v1.0 is *not* a reliable
 #'   proxy for Tideman's implementation of Meek's algorithm.
 #'   
-#'   Future researchers may wish to adjust the quota calculation of `vote.stv()`
+#'   Future researchers may wish to adjust the quota calculation of 'vote.stv()'
 #'   so that it is no longer biased upward by a "fuzz" of 0.001, to see if this
 #'   change significantly reduces the discrepancies with Tideman's
 #'   implementation of Meek.
@@ -232,7 +232,7 @@
 #'   researchers to develop a set of test cases with appropriate levels of
 #'   tolerance for the vagaries of floating-point roundoff in optimised (or even
 #'   unoptimised!) compilations of the same code on different computing systems.
-#'   We suggest that `a53_hil` be included in any such test set.
+#'   We suggest that 'a53_hil' be included in any such test set.
 #'   
 #'   We note in passing that B.A. Wichmann, in "Checking two STV programs",
 #'   Voting Matters 11, 2000, discussed the cross-validation exercise he

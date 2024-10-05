@@ -26,14 +26,14 @@ testAdditions(
 
 \item{arep}{Maximum number of ballot-stuffed elections to run}
 
-\item{favoured}{Name of the candidate being "plumped".  If \code{NULL}, a random
+\item{favoured}{Name of the candidate being "plumped".  If 'NULL', a random
 candidate is selected from among the candidates not initially top-ranked.
 All other candidates are fully-ranked at random, with an identical ballot
-paper being stuffed multiple times.  An integer value for \code{favoured} is
+paper being stuffed multiple times.  An integer value for 'favoured' is
 interpreted as an index into the candidate names.}
 
-\item{tacticalBallot}{A ballot paper i.e. a vector of length \code{ncol(ballots)}.
-If this argument is non-\code{NULL}, it takes precedence over \code{favoured} when the
+\item{tacticalBallot}{A ballot paper i.e. a vector of length 'ncol(ballots)'.
+If this argument is non-'NULL', it takes precedence over 'favoured' when the
 ballot box is being stuffed.}
 
 \item{rankMethod}{"safeRank" (default), "elected", or "rank".  "rank" is
@@ -45,12 +45,12 @@ assigns rank=1 to elected candidates, rank=2 for eliminated candidates.}
 \item{countArgs}{List of args to be passed to countMethod (in addition to
 votes)}
 
-\item{exptName}{stem-name of experimental units \emph{e.g.} "E".  If \code{NULL}, then
+\item{exptName}{stem-name of experimental units \emph{e.g.} "E".  If 'NULL', then
 a 3-character string of capital letters is chosen at random.}
 
-\item{equiet}{\code{TRUE} to suppress all experimental output}
+\item{equiet}{'TRUE' to suppress all experimental output}
 
-\item{everbose}{\code{TRUE} to produce diagnostic output from the experiment}
+\item{everbose}{'TRUE' to produce diagnostic output from the experiment}
 }
 \value{
 A matrix of experimental results, of dimension \eqn{n} by \eqn{2m+1},
@@ -60,11 +60,11 @@ the ranking of the eponymous candidate, and their margin over the
 next-lower-ranked candidate.
 }
 \description{
-Ballots are added until a specified number of simulated elections (\code{arep})
-have been held.   If a \code{favoured} candidate is specified, then the ballot-box
+Ballots are added until a specified number of simulated elections ('arep')
+have been held.   If a 'favoured' candidate is specified, then the ballot-box
 is stuffed with ballots awarding first-preference to this candidate.
-Alternatively, a \code{tacticalBallot} may be specified.  If both \code{favoured} and
-\code{tacticalBallot} are \code{NULL}, then a random candidate is selected as the
+Alternatively, a 'tacticalBallot' may be specified.  If both 'favoured' and
+'tacticalBallot' are 'NULL', then a random candidate is selected as the
 favoured one.
 }
 \examples{

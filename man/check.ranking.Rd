@@ -10,7 +10,7 @@ check.ranking(r)
 \item{r}{a numeric vector}
 }
 \value{
-a partial ranking of the elements of \code{r}, using \code{ties.method="min"}
+a partial ranking of the elements of 'r', using 'ties.method="min"'
 }
 \description{
 check the validity of a partial ranking

@@ -12,7 +12,7 @@
 \item{...}{parameters passed to generic \link{print}}
 }
 \value{
-textual description of \code{x}
+textual description of 'x'
 }
 \description{
 print method for summary.SafeVote.condorcet

@@ -14,7 +14,7 @@
 \item{digits}{undocumented}
 }
 \value{
-data.frame summarising \code{object}, for use by \code{print} method
+data.frame summarising 'object', for use by 'print' method
 }
 \description{
 summary() method for a SafeVote result

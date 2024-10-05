@@ -11,7 +11,7 @@ combineRankings(r1, r2)
 }
 \value{
 the most complete (but possibly partial) ranking which is consistent
-with both r1 and r2.  Uses \code{ties.method="min"}
+with both r1 and r2.  Uses 'ties.method="min"'
 }
 \description{
 the least upper bound on a pair of rankings

@@ -19,6 +19,6 @@
 graphics object, with side-effect in RStudio's Plots pane
 }
 \description{
-The \code{plot} function shows the evolution of the total score for each candidate
+The 'plot' function shows the evolution of the total score for each candidate
 as well as the quota.
 }
