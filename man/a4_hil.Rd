@@ -9,7 +9,7 @@ A data frame with attribute "nseats" = 2, consisting of 43
 observations and 14 candidates.
 }
 \usage{
-data(a4_hil)
+a4_hil
 }
 \description{
 This data is one of 87 sets of ballots from the Tideman data

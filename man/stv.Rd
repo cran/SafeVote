@@ -84,7 +84,7 @@ branch to allow regression against the legacy codebase of \code{\link[vote:stv]{
 legacy value of 1234, to mitigate the validity hazard of PRNG reseedings
 during a stochastic experiment.}
 
-\item{quiet}{'TRUE' to suppress console output}
+\item{quiet}{'TRUE' to suppress console output, and also output to Viewer}
 
 \item{digits}{number of significant digits in the output table}
 
@@ -139,14 +139,13 @@ tie-break happened (see the 'ties' element in the Value section for an
 explanation of the symbols).
 
 The ordered tiebreaking described above can be analysed from outside of the
-'stv' function by using the 'ordered.tiebreak' function for viewing the
+'stv' function by using the 'ordered.tiebreak' function for Viewing the
 a-priori ordering (the highest number is the best and lowest is the worst).
 Such ranking is produced by comparing candidates along the columns of the
 matrix returned by 'ordered.preferences'.
 }
 \examples{
-data(food_election)
-stv(food_election, safety = 0.0)
-stv(food_election, nseats = 2)
+summary(stv(food_election, safety = 0.0, quiet=TRUE))
+summary(stv(food_election, nseats = 2, quiet=TRUE))
 
 }

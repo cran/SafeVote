@@ -2,7 +2,7 @@
 % Please edit documentation in R/saferank.R
 \name{rbind_SafeRankExpt}
 \alias{rbind_SafeRankExpt}
-\title{add a row to a SafeRankExpt object}
+\title{add a row to a SafeRankExpt object, using dplyr::bind_rows()}
 \usage{
 rbind_SafeRankExpt(object, row)
 }
@@ -15,5 +15,5 @@ rbind_SafeRankExpt(object, row)
 SafeRankExpt object with an additional row
 }
 \description{
-add a row to a SafeRankExpt object
+add a row to a SafeRankExpt object, using dplyr::bind_rows()
 }

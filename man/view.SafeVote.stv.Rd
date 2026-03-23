@@ -4,7 +4,7 @@
 \alias{view.SafeVote.stv}
 \title{view method for the result of an stv() ballot-count}
 \usage{
-\method{view}{SafeVote.stv}(object, ...)
+\method{view.SafeVote}{stv}(object, ...)
 }
 \arguments{
 \item{object}{object to be viewed}

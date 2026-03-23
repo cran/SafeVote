@@ -1,0 +1,10 @@
+1.0.1 (2024-10-05) First release to CRAN
+
+1.0.2 (2026-03-23) Updated to allow regression against the current version
+(2.5-2) of vote -- which had added a "weights" feature.  The regression is
+still successful against vote 2.5-2, although its count of the Dublin West
+ballots is so slow (approx 2 minutes on my laptop) that I have stored its
+results so that all regression tests complete within 15 seconds.
+
+2.5-1/2 (02/26/2026)
+

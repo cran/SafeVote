@@ -53,11 +53,12 @@ a 3-character string of capital letters is chosen at random.}
 \item{everbose}{'TRUE' to produce diagnostic output from the experiment}
 }
 \value{
-A matrix of experimental results, of dimension \eqn{n} by \eqn{2m+1},
-where \eqn{n} is the number of elections and \eqn{m} is the number of
-candidates.  The first column is named "nBallots".  Other columns indicate
-the ranking of the eponymous candidate, and their margin over the
-next-lower-ranked candidate.
+'SafeRankExpt' object, containing a matrix of experimental
+results, of dimension \eqn{n} by \eqn{2m+1}, where \eqn{n} is the number of
+elections and \eqn{m} is the number of candidates.  The first column is
+named "nBallots".  Other columns indicate the ranking of the eponymous
+candidate, and their margin over the next-lower-ranked candidate.  See
+\code{\link[=new_SafeRankExpt]{new_SafeRankExpt()}}
 }
 \description{
 Ballots are added until a specified number of simulated elections ('arep')
@@ -68,7 +69,6 @@ Alternatively, a 'tacticalBallot' may be specified.  If both 'favoured' and
 favoured one.
 }
 \examples{
-data(food_election) 
 testAdditions(food_election, arep = 2, favoured = "Strawberries", 
   countArgs = list(safety = 0))
 

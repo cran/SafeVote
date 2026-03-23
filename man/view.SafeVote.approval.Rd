@@ -4,7 +4,7 @@
 \alias{view.SafeVote.approval}
 \title{view method for approval object}
 \usage{
-\method{view}{SafeVote.approval}(object, ...)
+\method{view.SafeVote}{approval}(object, ...)
 }
 \arguments{
 \item{object, ...}{undocumented}

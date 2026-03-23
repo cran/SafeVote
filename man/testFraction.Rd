@@ -26,7 +26,7 @@ testFraction(
 \item{ainc}{Number of ballots to be added in each step. Must be non-negative.}
 
 \item{arep}{Number of repetitions of the test on each step. Required to be
-non-'NULL' if 'ainc=0' && is.null(trep)'.}
+non-'NULL' if 'ainc=0 && is.null(trep)'.}
 
 \item{trep}{Limit on the total number of simulated elections. Required to be
 non-'NULL' if 'ainc=0 && is.null(arep)'.}
@@ -48,7 +48,8 @@ a 3-character string of capital letters is chosen at random.}
 \item{everbose}{'TRUE' to produce diagnostic output from the experiment}
 }
 \value{
-SafeRankExpt object of experimental results.
+'SafeRankExpt' object of experimental results.  See
+\code{\link[=new_SafeRankExpt]{new_SafeRankExpt()}}
 }
 \description{
 Starting from some number ('astart') of randomly-selected ballots, an
@@ -58,7 +59,6 @@ unit; if you want to count decreasingly-sized portions of a single sample of
 ballots, use \code{\link[=testDeletions]{testDeletions()}}.
 }
 \examples{
-data(food_election)
 testFraction(food_election, countMethod="condorcet",
              countArgs=list(safety=0.5,complete.ranking=TRUE))
 testFraction(dublin_west, astart=20, ainc=10, arep=2, trep=3, 

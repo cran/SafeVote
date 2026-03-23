@@ -10,7 +10,7 @@ made up). Each record corresponds to one ballot, with higher values
 indicating the more-preferred candidates.
 }
 \usage{
-data(ims_score)
+ims_score
 }
 \description{
 Modified version of ims_election, for use in score voting.

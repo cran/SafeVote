@@ -4,7 +4,7 @@
 \alias{view.SafeVote.score}
 \title{view method for score object}
 \usage{
-\method{view}{SafeVote.score}(object, ...)
+\method{view.SafeVote}{score}(object, ...)
 }
 \arguments{
 \item{object, ...}{undocumented}

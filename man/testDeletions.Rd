@@ -38,7 +38,7 @@ from 'votes', without replacement)}
 
 \item{rankMethod}{"safeRank" (default), "elected", or "rank".  "rank" is
 a total ranking of the candidates, with ties broken at random.  "elected"
-assigns rank=1 to elected candidates, rank=2 for eliminated candidates.}
+assigns rank=1 to elected candidates, rank=2 to eliminated candidates.}
 
 \item{exptName}{stem-name of experimental units \emph{e.g.} "E".  If 'NULL', then
 a 3-character string of capital letters is chosen at random.}
@@ -48,7 +48,8 @@ a 3-character string of capital letters is chosen at random.}
 \item{everbose}{TRUE to produce diagnostic output from the experiment}
 }
 \value{
-'SafeRankExpt' object, describing this experiment and its results
+'SafeRankExpt' object of experimental results.  See
+\code{\link[=new_SafeRankExpt]{new_SafeRankExpt()}}
 }
 \description{
 Ballots are deleted at random from the ballot-box, with election results
@@ -59,8 +60,6 @@ ballot-counts have occurred.  Note: these ballot-counts are correlated.  Use
 ballot-box.
 }
 \examples{
-data(food_election)
-testDeletions(food_election)
 testDeletions(food_election, countMethod="stv",
   countArgs=list(complete.ranking=TRUE))
 

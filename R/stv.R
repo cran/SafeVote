@@ -1,3 +1,4 @@
+
 #' Count preferential ballots using an STV method
 #'
 #' The 'votes' parameter is as described in [condorcet()] with the following
@@ -35,7 +36,7 @@
 #' explanation of the symbols).
 #' 
 #' The ordered tiebreaking described above can be analysed from outside of the
-#' 'stv' function by using the 'ordered.tiebreak' function for viewing the
+#' 'stv' function by using the 'ordered.tiebreak' function for Viewing the
 #' a-priori ordering (the highest number is the best and lowest is the worst).
 #' Such ranking is produced by comparing candidates along the columns of the
 #' matrix returned by 'ordered.preferences'.
@@ -81,7 +82,7 @@
 #'   [SafeVote::stv()] the default value for seed is 'NULL' rather than the
 #'   legacy value of 1234, to mitigate the validity hazard of PRNG reseedings
 #'   during a stochastic experiment.
-#' @param quiet 'TRUE' to suppress console output
+#' @param quiet 'TRUE' to suppress console output, and also output to Viewer
 #' @param digits number of significant digits in the output table
 #' @param backwards.compatible 'TRUE' to regress against vote2_3.2 by
 #'   disabling $margins, $fuzz, $rankingTable, $safeRank
@@ -95,9 +96,8 @@
 #'   partial) safeRank.
 #' @export
 #'
-#' @examples data(food_election)
-#' @examples stv(food_election, safety = 0.0)
-#' @examples stv(food_election, nseats = 2)
+#' @examples summary(stv(food_election, safety = 0.0, quiet=TRUE))
+#' @examples summary(stv(food_election, nseats = 2, quiet=TRUE))
 #'
 stv <-
   function(votes,
@@ -232,25 +232,20 @@ stv <-
       if (invalid.partial) {
         corvotes <- correct.ranking(votes, partial = TRUE, quiet = quiet)
       }
+    }
       
-      x <-
-        check.votes(corvotes,
-                    "stv",
-                    equal.ranking = equal.ranking,
-                    quiet = quiet)
-      corrected <-
-        which(rowSums(corvotes != votes) > 0 &
-                rownames(votes) %in% rownames(x))
-      
-      if (length(corrected) > 0) {
-        corrected.votes <-
-          list(
-            original = votes[corrected, ],
-            new = corvotes[corrected,],
-            index = as.numeric(corrected)
-          )
-      }
-      
+    x <-
+      check.votes(corvotes, "stv", equal.ranking = equal.ranking, quiet = quiet)
+    
+    corrected <-
+      which(rowSums(corvotes != votes) > 0 &
+              rownames(votes) %in% rownames(x))
+    
+    if (length(corrected) > 0) {
+      corrected.votes <-
+        list(original = votes[corrected, ],
+             new = corvotes[corrected, ],
+             index = as.numeric(corrected))
     }
     
     nvotes <- nrow(x)
@@ -292,6 +287,7 @@ stv <-
       result.margins <- rep(NA, nc)
       names(result.margins) <- cnames
     }
+    
     orig.x <- x
     
     ##
@@ -588,6 +584,17 @@ stv <-
           NULL
       )
     )
+    #hack to regress against vote 2.5-2. N.b. attributes are not reliably
+    #preserved in base R.  Common operations, such as subsetting a vector,
+    #quietly delete them! The intent in vote 2.5-2 is to associate a weight with
+    #each ballot -- and it is implemented by associating a vector of weights
+    #with a vector of ballots, and by subclassing the vector-subset operation of
+    #base R.
+    if (backwards.compatible) {
+      dif <- setdiff(rownames(votes), rownames(x))
+      attr(partialResult$invalid.votes, "weights") <- 
+        attr(votes, "weights")[dif]
+    }
     if (!backwards.compatible) {
       partialResult$nseats = nseats.initial
       partialResult$ranking = result.ranks
@@ -610,7 +617,7 @@ stv <-
     }
     
     if (!quiet) {
-      print(summary(result, digits = digits))
+      utils::View(as.data.frame(summary(result, digits = digits)))
     }
     invisible(result)
   }
@@ -836,21 +843,22 @@ backwards.tiebreak <- function(prefs, icans, elim = TRUE) {
 #'
 summary.SafeVote.stv <- function(object, ..., digits = 3) {
   
-  ## The following function is of undocumented origin.  The intent of the code
-  ## is apparently to introduce a "fuzz" on float-to-integer automagic
-  ## conversions which is right-sized: large enough that programmer-intended
-  ## integral values appear to have been computed by integer arithmetic, but not
-  ## so large that any values which "really are" non-integral are ever
-  ## inappropriately rounded to the nearest integer in a printout. All "fuzzing"
-  ## regimes (including the ones found in various versions of Basic and Python)
-  ## have the potential to distort results -- especially if the programmer has
-  ## attempted to emulate integer arithmetic using "fuzzed" floating-point
-  ## values. One fundamental problem is that the limited-precision mantissa of a
-  ## double-precision float is mostly occupied by the significant digits of a
-  ## large integer value, leaving very little headroom for "fuzzing".  Also,
-  ## subtracting two floating-point numbers which are nearly equal to each other
-  ## may result in a result with surprisingly-low precision, in a phenomenon
-  ## sometimes called "catastrophic cancellation" [Goldberg
+  ## The following function was inherited from stv. It is of undocumented
+  ## origin.  The intent of the code is apparently to introduce a "fuzz" on
+  ## float-to-integer automagic conversions which is right-sized: large enough
+  ## that programmer-intended integral values appear to have been computed by
+  ## integer arithmetic, but not so large that any values which "really are"
+  ## non-integral are never inappropriately rounded to the nearest integer in a
+  ## printout. All such "fuzzing" regimes (including the ones found in various
+  ## versions of Basic and Python) have the potential to distort results --
+  ## especially if the programmer has attempted to emulate integer arithmetic
+  ## using "fuzzed" floating-point values. One fundamental problem is that the
+  ## limited-precision mantissa of a double-precision float is mostly occupied
+  ## by the significant digits of a large integer value, leaving very little
+  ## headroom for "fuzzing".  Also, subtracting two floating-point numbers which
+  ## are nearly equal to each other may result in a result with surprisingly-low
+  ## precision, in a phenomenon sometimes called "catastrophic cancellation"
+  ## [Goldberg
   ## (1991)](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html).
   decimalplaces <- function(x) {
     ifelse(abs(x - round(x)) > .Machine$double.eps ^ 0.5,
@@ -860,7 +868,7 @@ summary.SafeVote.stv <- function(object, ..., digits = 3) {
            0)
   }
   ## TODO: consider using formattable::formattable() instead of this function.
-  ## Note that formattable::formattable() is imported by view.stv().  See
+  ## See
   ## https://stackoverflow.com/questions/3443687/formatting-decimal-places-in-r
 
   backwards.compatible <- is.null(object$nseats)
@@ -1028,18 +1036,18 @@ print.summary.SafeVote.stv <- function(x, ...) {
 #'
 #' @return html-formatted object, with side-effect in RStudio's Viewer pane
 #' @export
-view <- function(object, ...) {
+view.SafeVote <- function(object, ...) {
   UseMethod("view")
 }
 
 #' view method for the result of an stv() ballot-count
+#'
 #' @param object object to be viewed
 #' @param ... additional parameters, passed to formattable::formattable()
 #'
 #' @return html-formatted object
 #' @import formattable 
 #' @export
-#'
 view.SafeVote.stv <- function(object, ...) {
   s <- summary(object)
   formatter <-

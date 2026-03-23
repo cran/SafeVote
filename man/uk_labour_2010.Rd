@@ -8,7 +8,7 @@
 A data frame with 266 observations and 5 candidates.
 }
 \usage{
-data(uk_labour_2010)
+uk_labour_2010
 }
 \description{
 These are the ballots cast by Labour MPs and MEPs in an election

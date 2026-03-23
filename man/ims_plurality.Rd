@@ -10,7 +10,7 @@ made up). Each record corresponds to one ballot, with 1 against
 the voter's most-preferred candidate and 0 against all other candidates.
 }
 \usage{
-data(ims_plurality)
+ims_plurality
 }
 \description{
 Modified version of ims_election, for use in plurality voting.

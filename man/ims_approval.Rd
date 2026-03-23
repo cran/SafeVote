@@ -10,7 +10,7 @@ made up). Each record corresponds to one ballot, with 0 indicating
 disapproval of a candidate and 1 indicating approval.
 }
 \usage{
-data(ims_approval)
+ims_approval
 }
 \description{
 Modified version of ims_election, for use in approval voting.

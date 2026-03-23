@@ -10,7 +10,7 @@ Pears, Chocolate, Strawberries, Sweets). Each record corresponds to
 one ballot with ranking for each of the candidates.
 }
 \usage{
-data(food_election)
+food_election
 }
 \description{
 Sample data for testing SafeVote

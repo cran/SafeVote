@@ -4,7 +4,7 @@
 \alias{view.SafeVote.condorcet}
 \title{view method for SafeVote.condorcet}
 \usage{
-\method{view}{SafeVote.condorcet}(object, ...)
+\method{view.SafeVote}{condorcet}(object, ...)
 }
 \arguments{
 \item{object}{of type SafeVote.condorcet}
@@ -12,7 +12,7 @@
 \item{...}{see \link{view.SafeVote.approval}}
 }
 \value{
-view object
+View object
 }
 \description{
 view method for SafeVote.condorcet

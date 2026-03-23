@@ -11,7 +11,7 @@ is done using the STV method, and thus the ims_election dataset contains
 ballots with candidates being ranked between 1 and 10 with zeros allowed.
 }
 \usage{
-data(ims_election)
+ims_election
 }
 \description{
 Datasets containing anonymized votes for a past Council

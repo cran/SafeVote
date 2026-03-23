@@ -8,7 +8,7 @@
 A data frame with 479 observations and 44 candidates.
 }
 \usage{
-data(yale_ballots)
+yale_ballots
 }
 \description{
 This data follows the structure of a 2016 Yale

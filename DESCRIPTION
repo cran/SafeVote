@@ -1,8 +1,8 @@
 Package: SafeVote
 Type: Package
 Title: Election Vote Counting with Safety Features
-Version: 1.0.1
-Date: 2024-10-04
+Version: 1.0.2
+Date: 2026-03-23
 Authors@R: c(person("Clark","Thomborson",role=c("cre","aut"),
   email="c.thomborson@auckland.ac.nz",comment=c(ORCID="0000-0002-4147-7898")))
 Description: Fork of 'vote_2.3-2', Raftery et al. (2021)
@@ -15,14 +15,14 @@ Encoding: UTF-8
 License: GPL (>= 2)
 Language: EN-GB
 NeedsCompilation: no
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 LazyData: true
-URL: https://cran.r-project.org/package=SafeVote,
-        https://cthombor.github.io/SafeVote/
+URL: https://cthombor.github.io/SafeVote/
 Suggests: testthat (>= 3.0.0), vote, STV
 Config/testthat/edition: 3
-Packaged: 2024-10-05 22:15:35 UTC; cthom
-Author: Clark Thomborson [cre, aut] (<https://orcid.org/0000-0002-4147-7898>)
+Packaged: 2026-03-23 08:01:46 UTC; cthom
+Author: Clark Thomborson [cre, aut] (ORCID:
+    <https://orcid.org/0000-0002-4147-7898>)
 Maintainer: Clark Thomborson <c.thomborson@auckland.ac.nz>
 Repository: CRAN
-Date/Publication: 2024-10-05 22:50:03 UTC
+Date/Publication: 2026-03-23 08:30:15 UTC

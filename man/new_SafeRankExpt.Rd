@@ -39,10 +39,11 @@ simulated these elections e.g. "testFraction"}
 experimentalMethod}
 
 \item{unitFactors}{per-unit factors derived from PRNG of the experimental
-harness, e.g describing the ballots randomly deleted during testDeletions}
+harness, e.g describing the ballots randomly deleted during
+\code{\link[=testDeletions]{testDeletions()}}}
 }
 \value{
-object of class SafeRankExpt
+object of class 'SafeRankExpt'
 }
 \description{
 Constructor for the results of a SafeRank experiment

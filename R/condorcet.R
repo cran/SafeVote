@@ -391,7 +391,7 @@ print.summary.SafeVote.condorcet <- function(x, ...) {
 #' @param object of type SafeVote.condorcet
 #' @param ... see [view.SafeVote.approval] 
 #'
-#' @return view object
+#' @return View object
 #' @export
 view.SafeVote.condorcet <- function(object, ...) {
     view.SafeVote.approval(object, ...)

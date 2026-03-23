@@ -1,7 +1,7 @@
 test_that("vote.stv defaults on food_election", {
   skip_if_not_installed("vote")
   expect_equal(
-    SafeVote::stv(food_election, backwards.compatible = TRUE),
+    SafeVote::stv(food_election, backwards.compatible = TRUE, quiet=TRUE),
     vote::stv(food_election, complete.ranking = TRUE)
   )
 })
@@ -9,7 +9,7 @@ test_that("vote.stv defaults on food_election", {
 test_that("vote.stv defaults on ims_election", {
   skip_if_not_installed("vote")
   expect_equal(
-    SafeVote::stv(ims_election, backwards.compatible = TRUE),
+    SafeVote::stv(ims_election, backwards.compatible = TRUE, quiet=TRUE),
     vote::stv(ims_election, complete.ranking = TRUE)
   )
 })
@@ -17,8 +17,8 @@ test_that("vote.stv defaults on ims_election", {
 test_that("vote.stv defaults on dublin_west", {
   skip_if_not_installed("vote")
   expect_equal(
-    SafeVote::stv(dublin_west, backwards.compatible = TRUE),
-    vote::stv(dublin_west, complete.ranking = TRUE)
+    SafeVote::stv(dublin_west, backwards.compatible = TRUE, quiet=TRUE),
+    dublin_west_vote_count
   )
 })
 
@@ -28,13 +28,10 @@ test_that("vote.stv on dublin_west with three seats", {
     SafeVote::stv(
       dublin_west,
       nseats = 3,
-      backwards.compatible = TRUE
+      backwards.compatible = TRUE, 
+      quiet=TRUE
     ),
-    vote::stv(
-      dublin_west,
-      nseats = 3,
-      complete.ranking = TRUE
-    )
+    dublin_west_vote_count_3seats
   )
 })
 
@@ -45,7 +42,8 @@ test_that("vote.stv on food_election with three seats and seed = 1234", {
       food_election,
       nseats = 3,
       seed = 1234,
-      backwards.compatible = TRUE
+      backwards.compatible = TRUE,
+      quiet=TRUE
     ),
     vote::stv(
       food_election,
@@ -62,7 +60,8 @@ test_that("stv.STV on yale_ballots with seed = 1234", {
     yale_ballots,
     nseats = 4,
     seed = 1234,
-    quota.hare = TRUE
+    quota.hare = TRUE,
+    quiet=TRUE
   )$elected,
   {
     set.seed(1234)

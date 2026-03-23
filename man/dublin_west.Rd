@@ -10,7 +10,7 @@ corresponds to one ballot with candidates being ranked between 1 and 9 with
 zeros allowed.
 }
 \usage{
-data(dublin_west)
+dublin_west
 }
 \description{
 Dataset containing ranked votes for the Dublin West constituency

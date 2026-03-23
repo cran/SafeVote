@@ -14,7 +14,7 @@ matrix with one column per candidate and one row per invalid
 ballot
 }
 \description{
-This method was added Jan 2022 -- it was named in a warning message but had
-apparently either never been implemented, or had been "lost" through
+This method was added to stv in Jan 2022 -- it was named in a warning message
+but had apparently either never been implemented, or had been "lost" through
 versioning.
 }

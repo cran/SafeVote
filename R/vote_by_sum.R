@@ -285,7 +285,7 @@ print.summary.SafeVote.plurality <- function(x, ...) {
 #'
 #' @param object,... undocumented
 #'
-#' @return undocumented
+#' @return View object
 #' @export
 view.SafeVote.plurality <- function(object, ...) {
   view.SafeVote.approval(object, ...)

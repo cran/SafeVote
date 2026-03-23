@@ -14,7 +14,7 @@
 #'   'votes')
 #' @param rankMethod "safeRank" (default), "elected", or "rank".  "rank" is
 #'   a total ranking of the candidates, with ties broken at random.  "elected"
-#'   assigns rank=1 to elected candidates, rank=2 for eliminated candidates.
+#'   assigns rank=1 to elected candidates, rank=2 to eliminated candidates.
 #' @param dstart Number of ballots in the first ballot-count (selected at random
 #'   from 'votes', without replacement)
 #' @param dinc Number of ballots to be deleted in subsequent steps
@@ -24,12 +24,11 @@
 #'   a 3-character string of capital letters is chosen at random.
 #' @param equiet TRUE to suppress all experimental output
 #' @param everbose TRUE to produce diagnostic output from the experiment
-#' @return 'SafeRankExpt' object, describing this experiment and its results
+#' @return 'SafeRankExpt' object of experimental results.  See
+#'   [new_SafeRankExpt()]
 #' @export
 #' @import data.table
 #' @examples
-#' data(food_election)
-#' testDeletions(food_election)
 #' testDeletions(food_election, countMethod="stv",
 #'   countArgs=list(complete.ranking=TRUE))
 #' 
@@ -221,14 +220,14 @@ testDeletions <- function(votes,
 #'   a 3-character string of capital letters is chosen at random.
 #' @param equiet 'TRUE' to suppress all experimental output
 #' @param everbose 'TRUE' to produce diagnostic output from the experiment
-#' @return A matrix of experimental results, of dimension \eqn{n} by \eqn{2m+1},
-#'   where \eqn{n} is the number of elections and \eqn{m} is the number of
-#'   candidates.  The first column is named "nBallots".  Other columns indicate
-#'   the ranking of the eponymous candidate, and their margin over the
-#'   next-lower-ranked candidate.
+#' @return 'SafeRankExpt' object, containing a matrix of experimental
+#'   results, of dimension \eqn{n} by \eqn{2m+1}, where \eqn{n} is the number of
+#'   elections and \eqn{m} is the number of candidates.  The first column is
+#'   named "nBallots".  Other columns indicate the ranking of the eponymous
+#'   candidate, and their margin over the next-lower-ranked candidate.  See
+#'   [new_SafeRankExpt()]
 #' @export
 #' @examples
-#' data(food_election) 
 #' testAdditions(food_election, arep = 2, favoured = "Strawberries", 
 #'   countArgs = list(safety = 0))
 #'
@@ -402,17 +401,17 @@ testAdditions <- function(votes,
 #' @param astart Starting number of ballots (min 2)
 #' @param ainc Number of ballots to be added in each step. Must be non-negative.
 #' @param arep Number of repetitions of the test on each step. Required to be
-#'   non-'NULL' if 'ainc=0' && is.null(trep)'.
+#'   non-'NULL' if 'ainc=0 && is.null(trep)'.
 #' @param trep Limit on the total number of simulated elections. Required to be
 #'   non-'NULL' if 'ainc=0 && is.null(arep)'.
 #' @param exptName stem-name of experimental units *e.g.* "E".  If 'NULL', then
 #'   a 3-character string of capital letters is chosen at random.
 #' @param equiet 'TRUE' to suppress all experimental output
 #' @param everbose 'TRUE' to produce diagnostic output from the experiment
-#' @return SafeRankExpt object of experimental results.
+#' @return 'SafeRankExpt' object of experimental results.  See
+#'   [new_SafeRankExpt()]
 #' @export
 #' @examples
-#' data(food_election)
 #' testFraction(food_election, countMethod="condorcet",
 #'              countArgs=list(safety=0.5,complete.ranking=TRUE))
 #' testFraction(dublin_west, astart=20, ainc=10, arep=2, trep=3, 
@@ -635,8 +634,9 @@ extractMargins <- function(marginNames, crRanks, cr) {
 #' @param otherFactors other secondary factors, e.g. parameters to
 #'   experimentalMethod
 #' @param unitFactors per-unit factors derived from PRNG of the experimental
-#'   harness, e.g describing the ballots randomly deleted during testDeletions 
-#' @return object of class SafeRankExpt
+#'   harness, e.g describing the ballots randomly deleted during
+#'   [testDeletions()]
+#' @return object of class 'SafeRankExpt'
 #' 
 #' @export
 new_SafeRankExpt <- function(rankNames =          list(),
@@ -735,7 +735,7 @@ is.SafeRankExpt <- function(x) {
   )
 }
 
-#' add a row to a SafeRankExpt object
+#' add a row to a SafeRankExpt object, using dplyr::bind_rows()
 #'
 #' @param object prior results of experimentation
 #' @param row    new observations
@@ -747,8 +747,6 @@ rbind_SafeRankExpt <- function(object, row) {
   ##TODO: optimise, if level 2 of the R Inferno is ever painfully hot
   result <- dplyr::bind_rows(object, row)
   stopifnot(identical(colnames(object), colnames(result)))
-  ## rbind returns a base-class data.frame
-  ## attr(result, "class") <- c("SafeRankExpt", "data.frame")
   stopifnot(is.SafeRankExpt(result)) 
   return(result)
 }
